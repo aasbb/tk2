@@ -1,0 +1,30 @@
+INITIALIZATION jumlahBukuDipinjam = 0, jumlahBukuDikembalikan = 0
+DECLARE jumlahBukuInventaris, bukuTersedia, kodeTransaksi, judulBuku, kodeBuku, jumlahBukuPinjam, jumlahBukuKembali
+
+// Module Memasukkan Jumlah Buku ke File Inventaris
+PRINT "Masukkan jumlah buku ke dalam inventaris: ", jumlahBukuInventaris
+bukuTersedia = jumlahBukuInventaris
+
+REPEAT
+    PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
+    IF kodeTransaksi is 'Q' THEN
+        Break
+    ELSE IF kodeTransaksi is 'P' THEN
+        // Module Input Peminjaman
+        PRINT "Masukkan judul buku yang akan dipinjam: ", judulBuku
+        PRINT "Masukkan kode buku: ", kodeBuku
+        PRINT "Masukkan jumlah buku yang akan dipinjam: ", jumlahBukuPinjam
+        bukuTersedia -= jumlahBukuPinjam
+        jumlahBukuDipinjam += jumlahBukuPinjam
+    ELSE IF kodeTransaksi is 'B' THEN
+        // Module Input Pengembalian
+        PRINT "Masukkan jumlah buku yang akan dikembalikan: ", jumlahBukuKembali
+        PRINT "Masukkan judul buku yang akan dikembalikan: ", judulBuku
+        PRINT "Masukkan kode buku: ", kodeBuku
+        bukuTersedia += jumlahBukuKembali
+        jumlahBukuDikembalikan += jumlahBukuKembali
+    END IF
+UNTIL kodeTransaksi is 'Q'
+// Module Jumlah Buku
+PRINT "Jumlah buku yang sedang dipinjam: ", jumlahBukuDipinjam
+PRINT "Jumlah buku yang sudah dikembalikan: ", jumlahBukuDikembalikan
