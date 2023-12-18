@@ -1,0 +1,57 @@
+START
+    CALL main ()
+        PROCEDURE main ()
+            INITIALIZATION jumlahBukuDipinjam = 0, jumlahBukuDikembalikan = 0
+            DECLARE jumlahBukuInventaris, bukuTersedia, kodeTransaksi, judulBuku, kodeBuku, jumlahBukuPinjam, jumlahBukuKembali
+
+            CALL jumlahBukuFileInventaris()
+
+            REPEAT
+                PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
+                IF kodeTransaksi is 'Q' THEN
+                    Break
+                ELSE IF kodeTransaksi is 'P' THEN
+                    // Module inputPeminjaman
+                    CALL inputPeminjaman()
+                ELSE IF kodeTransaksi is 'B' THEN
+                    // Module inputPengembalian
+                    CALL inputPengembalian()
+                END IF
+            UNTIL kodeTransaksi is 'Q'    
+            
+            // Module jumlahBuku
+            CALL jumlahBuku()
+        END PROCEDURE
+
+        PROCEDURE jumlahBukuFileInventaris ()
+            DECLARE jumlahBukuInventaris, bukuTersedia 
+            PRINT "Masukkan jumlah buku ke dalam inventaris: ", jumlahBukuInventaris
+            bukuTersedia = jumlahBukuInventaris
+        END PROCEDURE
+
+        PROCEDURE inputPeminjaman()
+            INITIALIZATION jumlahBukuDipinjam = 0
+            DECLARE bukuTersedia, judulBuku, kodeBuku, jumlahBukuPinjam
+            PRINT "Masukkan judul buku yang akan dipinjam: ", judulBuku
+            PRINT "Masukkan kode buku: ", kodeBuku
+            PRINT "Masukkan jumlah buku yang akan dipinjam: ", jumlahBukuPinjam
+            bukuTersedia -= jumlahBukuPinjam
+            jumlahBukuDipinjam += jumlahBukuPinjam
+        END PROCEDURE
+
+        PROCEDURE inputPengembalian()
+            INITIALIZATION jumlahBukuDikembalikan = 0
+            DECLARE bukuTersedia, judulBuku, kodeBuku, jumlahBukuKembali
+            PRINT "Masukkan jumlah buku yang akan dikembalikan: ", jumlahBukuKembali
+            PRINT "Masukkan judul buku yang akan dikembalikan: ", judulBuku
+            PRINT "Masukkan kode buku: ", kodeBuku
+            bukuTersedia += jumlahBukuKembali
+            jumlahBukuDikembalikan += jumlahBukuKembali
+        END PROCEDURE
+
+        PROCEDURE inputPengembalian()
+            DECLARE jumlahBukuDipinjam, jumlahBukuDikembalikan
+            PRINT "Jumlah buku yang sedang dipinjam: ", jumlahBukuDipinjam
+            PRINT "Jumlah buku yang sudah dikembalikan: ", jumlahBukuDikembalikan
+        END PROCEDURE
+END
