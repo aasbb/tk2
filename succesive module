@@ -4,8 +4,21 @@ START
             INITIALIZATION jumlahBukuDipinjam = 0, jumlahBukuDikembalikan = 0
             DECLARE jumlahBukuInventaris, bukuTersedia, kodeTransaksi, judulBuku, kodeBuku, jumlahBukuPinjam, jumlahBukuKembali
 
-            // module transaksi
-            CALL transaksi()
+            CALL jumlahFileInventaris()
+            REPEAT
+                PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
+                IF kodeTransaksi is 'Q' THEN
+                    Break
+                ELSE IF kodeTransaksi is 'P' THEN
+                    // Module inputPeminjaman
+                    CALL inputPeminjaman()
+                ELSE IF kodeTransaksi is 'B' THEN
+                    // Module inputPengembalian
+                    CALL inputPengembalian()
+                END IF
+            UNTIL kodeTransaksi is 'Q'
+            // Module jumlahBuku
+            CALL jumlahBuku()
         END PROCEDURE
 
         PROCEDURE jumlahBukuFileInventaris ()
@@ -32,23 +45,5 @@ START
         PROCEDURE jumlahBuku()
             PRINT "Jumlah buku yang telah dipinjam: ", jumlahBukuDipinjam
             PRINT "Jumlah buku yang telah dikembalikan: ", jumlahBukuDikembalikan
-        END PROCEDURE
-
-        PROCEDURE transaksi()
-            CALL jumlahBukuFileInventaris ()
-            REPEAT
-                PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
-                IF kodeTransaksi is 'Q' THEN
-                    Break
-                ELSE IF kodeTransaksi is 'P' THEN
-                    // Module inputPeminjaman
-                    CALL inputPeminjaman()
-                ELSE IF kodeTransaksi is 'B' THEN
-                    // Module inputPengembalian
-                    CALL inputPengembalian()
-                END IF
-            UNTIL kodeTransaksi is 'Q'
-            // Module jumlahBuku
-            CALL jumlahBuku()
         END PROCEDURE
 END
