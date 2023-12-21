@@ -4,6 +4,7 @@ START
             INITIALIZATION jumlahBukuDipinjam = 0, jumlahBukuDikembalikan = 0
             DECLARE jumlahBukuInventaris, bukuTersedia, kodeTransaksi, judulBuku, kodeBuku, jumlahBukuPinjam, jumlahBukuKembali
 
+            // Module jumlahFileInventaris
             CALL jumlahFileInventaris()
             REPEAT
                 PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
