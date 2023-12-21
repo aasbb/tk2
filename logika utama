@@ -6,6 +6,7 @@ PRINT "Masukkan jumlah buku ke dalam inventaris: ", jumlahBukuInventaris
 bukuTersedia = jumlahBukuInventaris
 
 REPEAT
+    // Module transaksi
     PRINT "Masukkan transaksi (Peminjaman[P] / Pengembalian[B] / Keluar[Q]): ", kodeTransaksi
     IF kodeTransaksi is 'Q' THEN
         Break
